@@ -2,6 +2,10 @@ Expertiza::Application.routes.draw do
   ###
   # Please insert new routes alphabetically!
   ###
+
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+
   resources :admin, only: [] do
     collection do
       get :list_super_administrators
@@ -483,9 +487,4 @@ resources :institution, except: [:destroy] do
   get 'password_edit/check_reset_url', controller: :password_retrieval, action: :check_reset_url
   get ':controller(/:action(/:id))(.:format)'
   match '*path' => 'content_pages#view', :via => %i[get post] unless Rails.env.development?
-
-
-  require 'sidekiq/web'
-  mount Sidekiq::Web => '/sidekiq'
-
 end
