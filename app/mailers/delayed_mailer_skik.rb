@@ -9,10 +9,10 @@ class OutWorker
             sleep 20
             puts "super hard task, took quite a bit of effort"
         when "hard"
-            sleep 20
+            sleep 10
             puts "hard task, took a bit of work"
         when "easy"
-            sleep 20
+            sleep 2
             puts "easy task, that wasn't a lot of effort"
         end
     end    
