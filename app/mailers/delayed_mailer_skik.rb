@@ -1,7 +1,7 @@
-require 'sidekik'
+require 'sidekiq'
 
 class OutWorker
-    include Sidekik::Worker
+    include Sidekiq::Worker
 
     def perform(complexity)
         case complexity
