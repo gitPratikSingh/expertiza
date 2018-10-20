@@ -14,5 +14,6 @@ class OutWorker
         when "easy"
             sleep 20
             puts "easy task, that wasn't a lot of effort"
+        end
     end    
 end
