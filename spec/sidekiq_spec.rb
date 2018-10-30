@@ -21,14 +21,10 @@ describe MailWorker do
       expect(email.bcc[0]).to eq(user.email)
       expect(email.subject).to eq('Message regarding teammate review for assignment '+ assignment.name)
 
+      Sidekiq::Testing.fake!
       MailWorker.perform_in(3.hours, "1", "metareview", "2018-12-31 00:00:01")
-      queue = Sidekiq::Queue.new("mailer")
-      queue.each do |job|
-        puts job.klass
-        puts job.args.inspect
-        job.delete if job.jid == 'abcdef1234567890'
-      end
-
+      queue = Sidekiq::Queues["mailers"]
+      expect(queue.size).to eq(1)
     end
   end
 end
