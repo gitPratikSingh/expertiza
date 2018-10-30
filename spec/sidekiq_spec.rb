@@ -1,6 +1,6 @@
 describe MailWorker do
   let(:assignment) { build(:assignment, id: 1, name: "no assignment", participants: [participant], teams: [team]) }
-  let(:participant) { build(:participant, id: 1, parent_id: 1) }
+  let(:participant) { build(:participant, id: 1, parent_id: 1, user: user) }
   let(:team) { build(:assignment_team, id: 1, name: 'no team', users: [user], parent_id: 1) }
   let(:user) { build(:student, id: 1, email: 'psingh22@ncsu.edu') }
   
