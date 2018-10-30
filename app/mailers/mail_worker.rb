@@ -28,9 +28,9 @@ class MailWorker
       else
         self.deadline_type
       end
-
-      email_reminder(partcipant_mails, deadlineText) unless partcipant_mails.empty?
+      
       puts partcipant_mails.inspect
+      email_reminder(partcipant_mails, deadlineText) unless partcipant_mails.empty?
     end
   end
 
