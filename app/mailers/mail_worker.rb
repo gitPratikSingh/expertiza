@@ -29,9 +29,8 @@ class MailWorker
         self.deadline_type
       end
 
-      emails = email_reminder(partcipant_mails, deadlineText) unless partcipant_mails.empty?
+      email_reminder(partcipant_mails, deadlineText) unless partcipant_mails.empty?
       puts partcipant_mails.inspect
-      emails
     end
   end
 
@@ -40,13 +39,13 @@ class MailWorker
     subject = "Message regarding #{deadline_type} for assignment #{assignment.name}"
     body = "This is a reminder to complete #{deadline_type} for assignment #{assignment.name}. \
     Deadline is #{self.due_at}.If you have already done the  #{deadline_type}, Please ignore this mail."
-    emails = []
+
     emails.each do |mail|
       Rails.logger.info mail
     end
 
     @mail = Mailer.delayed_message(bcc: emails, subject: subject, body: body)
-    emails << @mail.deliver_now
+    @mail.deliver_now
   end
 
   def find_participant_emails

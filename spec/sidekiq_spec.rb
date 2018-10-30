@@ -15,9 +15,7 @@ describe MailWorker do
       Sidekiq::Testing.inline!
     end
     it "should send email to required email address with proper content" do
-      emails = MailWorker.perform_async("1", "metareview", "2018-12-31 00:00:01")
-      puts emails.inspect
+      MailWorker.perform_async("1", "metareview", "2018-12-31 00:00:01")
     end
   end
 end
-
