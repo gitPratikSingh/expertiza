@@ -17,10 +17,18 @@ describe MailWorker do
     it "should send email to required email address with proper content" do
       MailWorker.perform_async("1", "metareview", "2018-12-31 00:00:01")
       email = ActionMailer::Base.deliveries.first
-      puts email.inspect
       expect(email.from[0]).to eq("expertiza.development@gmail.com")
       expect(email.bcc[0]).to eq(user.email)
       expect(email.subject).to eq('Message regarding teammate review for assignment '+ assignment.name)
+
+      MailWorker.perform_in(3.hours, "1", "metareview", "2018-12-31 00:00:01")
+      queue = Sidekiq::Queue.new("mailer")
+      queue.each do |job|
+        puts job.klass
+        puts job.args.inspect
+        job.delete if job.jid == 'abcdef1234567890'
+      end
+
     end
   end
 end
