@@ -45,6 +45,7 @@ class MailWorker
     end
 
     @mail = Mailer.delayed_message(bcc: emails, subject: subject, body: body)
+    puts emails.inspect
     @mail.deliver_now
   end
 
