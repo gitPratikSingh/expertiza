@@ -28,7 +28,7 @@ describe MailWorker do
       expect(queue.size).to eq(1)
 
       queue.each do |job|
-        job.klass # => 'MyWorker'
+        puts job.inspect
         puts job.args.inspect # => [1, 2, 3]
         job.delete if job.jid == 'abcdef1234567890'
       end
