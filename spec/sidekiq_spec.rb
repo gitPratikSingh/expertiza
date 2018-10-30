@@ -1,13 +1,13 @@
 describe MailWorker do
   let(:assignment) { build(:assignment, id: 1, name: "no assignment", participants: [participant], teams: [team]) }
-  let(:participant) { build(:participant, id: 1) }
+  let(:participant) { build(:participant, id: 1, parent_id: 1) }
   let(:team) { build(:assignment_team, id: 1, name: 'no team', users: [user], parent_id: 1) }
   let(:user) { build(:student, id: 1, email: 'psingh22@ncsu.edu') }
   
   
   before(:each) do
     allow(Assignment).to receive(:find).with('1').and_return(assignment)
-    allow(Team).to receive(:where).with(parent_id: '1').and_return([team])
+    allow(Participant).to receive(:where).with(parent_id: '1').and_return([participant])
   end
 
   describe 'Tests mailer with sidekiq' do
@@ -19,3 +19,4 @@ describe MailWorker do
     end
   end
 end
+
