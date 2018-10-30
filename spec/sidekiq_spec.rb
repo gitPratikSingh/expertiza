@@ -29,7 +29,7 @@ describe MailWorker do
 
       queue.each do |job|
         puts job.inspect
-        puts jobs["args"].inspect
+        puts job["args"].first
         puts job.args.inspect # => [1, 2, 3]
         job.delete if job.jid == 'abcdef1234567890'
       end
