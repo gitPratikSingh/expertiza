@@ -19,8 +19,8 @@ describe MailWorker do
       email = ActionMailer::Base.deliveries.first
       puts email.inspect
       expect(email.from[0]).to eq("expertiza.development@gmail.com")
-      expect(email.bcc[0]).to eq(:user.email)
-      expect(email.subject).to eq('Message regarding teammate review for assignment '+ :assignment.name)
+      expect(email.bcc[0]).to eq(user.email)
+      expect(email.subject).to eq('Message regarding teammate review for assignment '+ assignment.name)
     end
   end
 end
