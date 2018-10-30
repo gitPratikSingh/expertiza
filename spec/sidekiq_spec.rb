@@ -15,9 +15,12 @@ describe MailWorker do
       Sidekiq::Testing.inline!
     end
     it "should send email to required email address with proper content" do
-      email = MailWorker.perform_async("1", "metareview", "2018-12-31 00:00:01")
+      MailWorker.perform_async("1", "metareview", "2018-12-31 00:00:01")
       puts email.inspect
-      puts ActionMailer::Base.deliveries.inspect
+      email = ActionMailer::Base.deliveries.first
+      expect(email.from[0]).to eq("expertiza.development@gmail.com")
+      expect(email.bcc[0]).to eq(user.email)
+      expect(email.subject).to eq('Message regarding teammate review for assignment no assignment')
     end
   end
 end
