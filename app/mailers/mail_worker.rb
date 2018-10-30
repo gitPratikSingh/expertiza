@@ -53,6 +53,7 @@ class MailWorker
     participants = Participant.where(parent_id: self.assignment_id)
     participants.each do |participant|
       emails<<participant.user.email unless participant.user.nil?
+      puts participant.user.inspect
     end
     emails
   end
