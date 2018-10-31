@@ -28,10 +28,8 @@ describe MailWorker do
       expect(queue.size).to eq(1)
 
       queue.each do |job|
-        puts job.inspect
-        puts job["args"].first
-        puts job.args.inspect # => [1, 2, 3]
-        job.delete if job.jid == 'abcdef1234567890'
+        assignment = job["args"].first
+        job.delete if assignment = "1"
       end
 
     end
