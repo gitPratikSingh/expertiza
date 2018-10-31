@@ -26,12 +26,6 @@ describe MailWorker do
       MailWorker.perform_in(3.hours, "1", "metareview", "2018-12-31 00:00:01")
       queue = Sidekiq::Queues["mailers"]
       expect(queue.size).to eq(1)
-
-      queue.each do |job|
-        assignment = job["args"].first
-        job.delete if assignment = "1"
-      end
-
     end
   end
 end
